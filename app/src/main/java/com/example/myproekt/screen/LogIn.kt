@@ -1,10 +1,15 @@
 package com.example.myproekt.screen
 
+
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
@@ -14,8 +19,12 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
@@ -25,7 +34,10 @@ import androidx.compose.ui.unit.sp
 @OptIn(ExperimentalMaterial3Api::class)
 @Preview
 @Composable
-fun LogIn() {
+fun LogIn(/*navHost: NavHostController*/) {
+    val email: String by rememberSaveable {
+        mutableStateOf("")
+    }
     Column (modifier = Modifier
         .fillMaxSize(1f)
         .background(Color.White))
@@ -47,33 +59,26 @@ fun LogIn() {
         Text(
             modifier = Modifier
                 .fillMaxWidth(0.9f)
-                .padding(top = 30.dp, end = 15.dp, start = 20.dp, bottom = 5.dp),
+                .padding(top = 30.dp, end = 15.dp, start = 20.dp),
             text = "Вход по E-mail", fontSize = 14.sp, color = Color.Gray
         )
         Column(modifier = Modifier.fillMaxWidth(1f),
             horizontalAlignment = Alignment.CenterHorizontally)
         {
-            TextField(modifier = Modifier.fillMaxWidth(0.9f),shape = RoundedCornerShape(10.dp),
-                value = "example@mail.ru", onValueChange = {},
-                colors = TextFieldDefaults.textFieldColors(
-                    containerColor = Color(0XFFF5F5F9),
-                    focusedIndicatorColor = Color.Transparent,
-                    focusedTextColor = Color(0XFF939396),
-                    unfocusedTextColor = Color(0XFF939396),
-                    disabledIndicatorColor = Color.Transparent,
-                    unfocusedIndicatorColor = Color.Transparent,
-                    cursorColor = Color.Gray
-                )
-            )
+            CustomEmail(search = email, onValueChange = {
+            })
+
         }
         Column(horizontalAlignment = Alignment.CenterHorizontally,
-            modifier = Modifier.fillMaxWidth(1f))
+            modifier = Modifier
+                .fillMaxWidth(1f)
+                .padding(top = 20.dp))
         {
             Button(
                 onClick = { /*TODO*/ },
                 modifier = Modifier
-                    .fillMaxWidth(0.9f)
-                    .padding(top = 15.dp),
+                    .height(60.dp)
+                    .fillMaxWidth(0.9f),
                 colors = ButtonDefaults.buttonColors(
                     containerColor = Color(0XFFC9D4FB),
                     contentColor = Color.White
@@ -84,23 +89,60 @@ fun LogIn() {
             }
         }
         Column( horizontalAlignment = Alignment.CenterHorizontally, verticalArrangement = Arrangement.Bottom,
-            modifier = Modifier.fillMaxWidth(1f)
+            modifier = Modifier
+                .fillMaxWidth()
+                .fillMaxSize()
+                .padding(bottom = 50.dp)
         )
         {
-            Text(text = "Или войдите с помощью", fontSize = 14.sp, color = Color.Gray)
+            Text(text = "Или войдите с помощью", fontSize = 14.sp, color = Color.Gray, modifier = Modifier.padding(bottom = 30.dp))
 
-            Button(onClick = { /*TODO*/ },
+            Button(
+                onClick = { /*TODO*/ },
                 modifier = Modifier
-                    .fillMaxWidth(0.9f)
-                    .padding(top = 15.dp),
+                    .height(60.dp)
+                    .fillMaxWidth(0.9f),
                 colors = ButtonDefaults.buttonColors(
                     containerColor = Color.White,
-                    contentColor = Color.White),
-                shape = RoundedCornerShape(10.dp)
+                    contentColor = Color.White
+                ),
+                shape = RoundedCornerShape(10.dp),
+                border = BorderStroke(1.dp, Color(0XFFEBEBEB))
             )
             {
                 Text(text = "Войти с Яндекс", fontSize = 17.sp, color = Color.Black)
             }
+        }
     }
+    
 }
+@ExperimentalMaterial3Api
+@Composable
+fun CustomEmail( search: String,
+                 modifier: Modifier = Modifier,
+                 onValueChange: (String) -> Unit) {
+    Box(
+        modifier = modifier
+            .padding(20.dp)
+            .clip(RoundedCornerShape(10.dp))
+            .background(Color(0XFFE8EFFF))
+
+    )
+    TextField(
+        modifier = Modifier
+            .fillMaxWidth(0.9f)
+            .border(width = 1.dp, color = Color(0XFFEBEBEB), shape = RoundedCornerShape(10.dp)),
+        shape = RoundedCornerShape(10.dp),
+        value = search, onValueChange = {},
+        colors = TextFieldDefaults.textFieldColors(
+            containerColor = Color(0XFFF5F5F9),
+            focusedIndicatorColor = Color.Transparent,
+            focusedTextColor = Color(0XFF939396),
+            unfocusedTextColor = Color(0XFF939396),
+            disabledIndicatorColor = Color.Transparent,
+            unfocusedIndicatorColor = Color.Transparent,
+            cursorColor = Color.Gray
+        )
+    )
 }
+
