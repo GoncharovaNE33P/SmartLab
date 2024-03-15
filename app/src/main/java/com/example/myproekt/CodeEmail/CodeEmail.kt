@@ -12,13 +12,19 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.KeyboardArrowLeft
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextField
+import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
@@ -26,9 +32,18 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Preview
 @Composable
 fun EmailCode(/*navHost: NavHostController*/) {
+    val (num1,setn1) = remember { mutableListOf("") }
+    val (num2,setn2) = remember { mutableListOf("") }
+    val (num3,setn3) = remember { mutableListOf("") }
+    val (num4,setn4) = remember { mutableListOf("") }
+    val maxLength = 1
+    val mContext = LocalContext.current
+    val focusManager = LocalFocusManager.current
+
     Column(modifier = Modifier
         .fillMaxSize(1f)
         .background(Color.White))
@@ -52,11 +67,27 @@ fun EmailCode(/*navHost: NavHostController*/) {
     Column(horizontalAlignment = Alignment.CenterHorizontally,
         modifier = Modifier
             .fillMaxWidth()
-            .fillMaxSize() )
+            .fillMaxSize())
     {
         Text(text = "Введите код из E-mail",fontWeight = FontWeight.Bold, fontSize = 24.sp,
             modifier = Modifier.padding(top = 240.dp))
-        Row {
+        Row(modifier = Modifier
+            .fillMaxWidth()
+            .padding(top = 30.dp)
+        )
+        {
+            Box(
+                modifier = Modifier.padding(10.dp))
+            {
+                /*TextField(value = num1,
+                    colors = TextFieldDefaults.textFieldColors(
+                      containerColor = Color(0xFFF5F5F9),
+                        focusedIndicatorColor = Color(0xFFEBEBEB),
+
+                    )
+                )*/
+            }
+
             Box(
                 modifier = Modifier
                     .padding(12.dp)
@@ -66,48 +97,13 @@ fun EmailCode(/*navHost: NavHostController*/) {
                     .background(Color(0xFFF5F5F9)),
                 contentAlignment = Alignment.Center
             )
-            {
-
-            }
-            Box(
-                modifier = Modifier
-                    .padding(12.dp)
-                    .height(48.dp)
-                    .width(48.dp)
-                    .clip(RoundedCornerShape(7.dp))
-                    .background(Color(0xFFF5F5F9)),
-                contentAlignment = Alignment.Center
-            )
-            {
-
-            }
-            Box(
-                modifier = Modifier
-                    .padding(12.dp)
-                    .height(48.dp)
-                    .width(48.dp)
-                    .clip(RoundedCornerShape(7.dp))
-                    .background(Color(0xFFF5F5F9)),
-                contentAlignment = Alignment.Center
-            )
-            {
-
-            }
-            Box(
-                modifier = Modifier
-                    .padding(12.dp)
-                    .height(48.dp)
-                    .width(48.dp)
-                    .clip(RoundedCornerShape(7.dp))
-                    .background(Color(0xFFF5F5F9)),
-                contentAlignment = Alignment.Center
-            )
-            {
-
-            }
+            {}
         }
         Text(text = "Отправить код повторно можно будет через 59 секунд",
             fontSize = 15.sp, color = Color(0XFF939396),
-            textAlign = TextAlign.Center, modifier = Modifier.width(242.dp).height(40.dp)     )
+            textAlign = TextAlign.Center, modifier = Modifier
+                .width(242.dp)
+                .height(43.dp)
+        )
     }
 }
