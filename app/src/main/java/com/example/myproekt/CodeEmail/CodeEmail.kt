@@ -42,13 +42,10 @@ import androidx.compose.ui.unit.sp
 @Preview
 @Composable
 fun EmailCode(/*navHost: NavHostController*/) {
-    val (num1,setn1) = remember { mutableListOf("") }
-    val (num2,setn2) = remember { mutableListOf("") }
-    val (num3,setn3) = remember { mutableListOf("") }
-    val (num4,setn4) = remember { mutableListOf("") }
-    val maxLength = 1
-    val mContext = LocalContext.current
-    val focusManager = LocalFocusManager.current
+    val (num1) = remember { mutableListOf("") }
+    val (num2) = remember { mutableListOf("") }
+    val (num3) = remember { mutableListOf("") }
+    val (num4) = remember { mutableListOf("") }
 
     Column(
         modifier = Modifier
@@ -137,13 +134,9 @@ fun EmailCode(/*navHost: NavHostController*/) {
                         )
                         .height(48.dp)
                         .width(48.dp),
+
                     singleLine = true,
-                    onValueChange = {
-                        if (it.length <= maxLength) setn1(it)
-                        else Toast.makeText(
-                            mContext, "Необходимо ввести 1 цифру",
-                            Toast.LENGTH_LONG).show()
-                    }
+                    onValueChange = {}
                 )
             }
             Box(modifier = Modifier.padding(10.dp))
@@ -168,12 +161,7 @@ fun EmailCode(/*navHost: NavHostController*/) {
                         .height(48.dp)
                         .width(48.dp),
                     singleLine = true,
-                    onValueChange = {
-                        if (it.length <= maxLength) setn2(it)
-                        else Toast.makeText(
-                            mContext, "Необходимо ввести 1 цифру",
-                            Toast.LENGTH_LONG).show()
-                    }
+                    onValueChange = {}
                 )
             }
             Box(modifier = Modifier.padding(10.dp))
@@ -198,12 +186,7 @@ fun EmailCode(/*navHost: NavHostController*/) {
                         .height(48.dp)
                         .width(48.dp),
                     singleLine = true,
-                    onValueChange = {
-                        if (it.length <= maxLength) setn3(it)
-                        else Toast.makeText(
-                            mContext, "Необходимо ввести 1 цифру",
-                            Toast.LENGTH_LONG).show()
-                    }
+                    onValueChange = {}
                 )
             }
             Box(modifier = Modifier.padding(10.dp))
@@ -228,12 +211,7 @@ fun EmailCode(/*navHost: NavHostController*/) {
                         .height(48.dp)
                         .width(48.dp),
                     singleLine = true,
-                    onValueChange = {
-                        if (it.length <= maxLength) setn4(it)
-                        else Toast.makeText(
-                            mContext, "Необходимо ввести 1 цифру",
-                            Toast.LENGTH_LONG).show()
-                    }
+                    onValueChange = {}
                 )
             }
         }
