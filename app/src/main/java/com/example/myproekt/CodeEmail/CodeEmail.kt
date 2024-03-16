@@ -1,6 +1,9 @@
 package com.example.myproekt.CodeEmail
 
+import android.widget.Toast
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -10,6 +13,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.KeyboardArrowLeft
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -25,7 +29,9 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalFocusManager
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -44,9 +50,11 @@ fun EmailCode(/*navHost: NavHostController*/) {
     val mContext = LocalContext.current
     val focusManager = LocalFocusManager.current
 
-    Column(modifier = Modifier
-        .fillMaxSize(1f)
-        .background(Color.White))
+    Column(
+        modifier = Modifier
+            .fillMaxSize(1f)
+            .background(Color.White)
+    )
     {
         Box(
             modifier = Modifier
@@ -55,55 +63,193 @@ fun EmailCode(/*navHost: NavHostController*/) {
                 .width(32.dp)
                 .clip(RoundedCornerShape(7.dp))
                 .background(Color(0xFFF5F5F9))
-                /*.clickable { navHost.navigate("logInScreen") }*/,
+            /*.clickable { navHost.navigate("logInScreen") }*/,
             contentAlignment = Alignment.Center
         )
         {
-         Icon(imageVector = Icons.Default.KeyboardArrowLeft,
-             contentDescription = "ArrowBack Icon"
-         )
+            Icon(
+                imageVector = Icons.Default.KeyboardArrowLeft,
+                contentDescription = "ArrowBack Icon"
+            )
         }
     }
-    Column(horizontalAlignment = Alignment.CenterHorizontally,
+    Column(
+        horizontalAlignment = Alignment.CenterHorizontally,
         modifier = Modifier
             .fillMaxWidth()
-            .fillMaxSize())
+            .fillMaxSize()
+    )
     {
-        Text(text = "Введите код из E-mail",fontWeight = FontWeight.Bold, fontSize = 24.sp,
-            modifier = Modifier.padding(top = 240.dp))
-        Row(modifier = Modifier
-            .fillMaxWidth()
-            .padding(top = 30.dp)
+        Text(
+            text = "Введите код из E-mail", fontWeight = FontWeight.Bold, fontSize = 24.sp,
+            modifier = Modifier.padding(top = 240.dp)
+        )
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(top = 30.dp),
+            horizontalArrangement = Arrangement.Center,
+            verticalAlignment = Alignment.CenterVertically
         )
         {
-            Box(
-                modifier = Modifier.padding(10.dp))
+            /*LaunchedEffect(key1 = num1, block = {
+                if (num1.isNotEmpty()){
+                    focusManager.moveFocus(
+                        focusDirection =  FocusDirection.Next)
+                }
+            })
+            LaunchedEffect(key1 = num2, block = {
+                if (num1.isNotEmpty()){
+                    focusManager.moveFocus(
+                        focusDirection =  FocusDirection.Next)
+                }
+            })
+            LaunchedEffect(key1 = num3, block = {
+                if (num1.isNotEmpty()){
+                    focusManager.moveFocus(
+                        focusDirection =  FocusDirection.Next)
+                }
+            })
+            LaunchedEffect(key1 = num4, block = {
+                if (num1.isNotEmpty()){
+                    focusManager.moveFocus(
+                        focusDirection =  FocusDirection.Next)
+                }
+            })*/
+            Box(modifier = Modifier.padding(10.dp))
             {
-                /*TextField(value = num1,
+                TextField(
+                    value = num1,
                     colors = TextFieldDefaults.textFieldColors(
-                      containerColor = Color(0xFFF5F5F9),
-                        focusedIndicatorColor = Color(0xFFEBEBEB),
-
-                    )
-                )*/
+                        containerColor = Color(0xFFF5F5F9),
+                        focusedIndicatorColor = Color.Transparent,
+                        unfocusedIndicatorColor = Color.Transparent,
+                        unfocusedTextColor = Color.Black
+                    ),
+                    shape = RoundedCornerShape((10.dp)),
+                    textStyle = TextStyle(textAlign = TextAlign.Center),
+                    keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
+                    modifier = Modifier
+                        .border(
+                            width = 1.dp,
+                            color = Color(0xFFEBEBEB),
+                            shape = RoundedCornerShape(10.dp)
+                        )
+                        .height(48.dp)
+                        .width(48.dp),
+                    singleLine = true,
+                    onValueChange = {
+                        if (it.length <= maxLength) setn1(it)
+                        else Toast.makeText(
+                            mContext, "Необходимо ввести 1 цифру",
+                            Toast.LENGTH_LONG).show()
+                    }
+                )
             }
-
-            Box(
-                modifier = Modifier
-                    .padding(12.dp)
-                    .height(48.dp)
-                    .width(48.dp)
-                    .clip(RoundedCornerShape(7.dp))
-                    .background(Color(0xFFF5F5F9)),
-                contentAlignment = Alignment.Center
-            )
-            {}
+            Box(modifier = Modifier.padding(10.dp))
+            {
+                TextField(
+                    value = num2,
+                    colors = TextFieldDefaults.textFieldColors(
+                        containerColor = Color(0xFFF5F5F9),
+                        focusedIndicatorColor = Color.Transparent,
+                        unfocusedIndicatorColor = Color.Transparent,
+                        unfocusedTextColor = Color.Black
+                    ),
+                    shape = RoundedCornerShape((10.dp)),
+                    textStyle = TextStyle(textAlign = TextAlign.Center),
+                    keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
+                    modifier = Modifier
+                        .border(
+                            width = 1.dp,
+                            color = Color(0xFFEBEBEB),
+                            shape = RoundedCornerShape(10.dp)
+                        )
+                        .height(48.dp)
+                        .width(48.dp),
+                    singleLine = true,
+                    onValueChange = {
+                        if (it.length <= maxLength) setn2(it)
+                        else Toast.makeText(
+                            mContext, "Необходимо ввести 1 цифру",
+                            Toast.LENGTH_LONG).show()
+                    }
+                )
+            }
+            Box(modifier = Modifier.padding(10.dp))
+            {
+                TextField(
+                    value = num3,
+                    colors = TextFieldDefaults.textFieldColors(
+                        containerColor = Color(0xFFF5F5F9),
+                        focusedIndicatorColor = Color.Transparent,
+                        unfocusedIndicatorColor = Color.Transparent,
+                        unfocusedTextColor = Color.Black
+                    ),
+                    shape = RoundedCornerShape((10.dp)),
+                    textStyle = TextStyle(textAlign = TextAlign.Center),
+                    keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
+                    modifier = Modifier
+                        .border(
+                            width = 1.dp,
+                            color = Color(0xFFEBEBEB),
+                            shape = RoundedCornerShape(10.dp)
+                        )
+                        .height(48.dp)
+                        .width(48.dp),
+                    singleLine = true,
+                    onValueChange = {
+                        if (it.length <= maxLength) setn3(it)
+                        else Toast.makeText(
+                            mContext, "Необходимо ввести 1 цифру",
+                            Toast.LENGTH_LONG).show()
+                    }
+                )
+            }
+            Box(modifier = Modifier.padding(10.dp))
+            {
+                TextField(
+                    value = num4,
+                    colors = TextFieldDefaults.textFieldColors(
+                        containerColor = Color(0xFFF5F5F9),
+                        focusedIndicatorColor = Color.Transparent,
+                        unfocusedIndicatorColor = Color.Transparent,
+                        unfocusedTextColor = Color.Black
+                    ),
+                    shape = RoundedCornerShape((10.dp)),
+                    textStyle = TextStyle(textAlign = TextAlign.Center),
+                    keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
+                    modifier = Modifier
+                        .border(
+                            width = 1.dp,
+                            color = Color(0xFFEBEBEB),
+                            shape = RoundedCornerShape(10.dp)
+                        )
+                        .height(48.dp)
+                        .width(48.dp),
+                    singleLine = true,
+                    onValueChange = {
+                        if (it.length <= maxLength) setn4(it)
+                        else Toast.makeText(
+                            mContext, "Необходимо ввести 1 цифру",
+                            Toast.LENGTH_LONG).show()
+                    }
+                )
+            }
         }
-        Text(text = "Отправить код повторно можно будет через 59 секунд",
-            fontSize = 15.sp, color = Color(0XFF939396),
-            textAlign = TextAlign.Center, modifier = Modifier
-                .width(242.dp)
+        Box(
+            modifier = Modifier
+                .padding(12.dp)
                 .height(43.dp)
+                .width(242.dp)
+                .clip(RoundedCornerShape(7.dp)),
+            contentAlignment = Alignment.Center
         )
+        {
+            Text(
+                text = "Отправить код повторно можно будет через 59 секунд",
+                fontSize = 15.sp, color = Color(0XFF939396),
+                textAlign = TextAlign.Center)
+        }
     }
 }

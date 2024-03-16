@@ -65,8 +65,7 @@ fun LogIn(navHost: NavHostController)
         Column(modifier = Modifier.fillMaxWidth(1f),
             horizontalAlignment = Alignment.CenterHorizontally)
         {
-            CustomEmail(search = email, onValueChange = {it->email =it
-            })
+            CustomEmail(search = email, onValueChange = {it->email =it})
         }
         Column(horizontalAlignment = Alignment.CenterHorizontally,
             modifier = Modifier
@@ -117,7 +116,6 @@ fun LogIn(navHost: NavHostController)
             }
         }
     }
-    
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
